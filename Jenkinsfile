@@ -28,7 +28,11 @@ pipeline {
         }
         stage('Sonar-Report') {
             steps {
-                sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AM0312_webapp-cicd'
+                script {
+                    env.SONAR_TOKEN = '3cf8f8dd674e6f64a5938e7467498f4fe41621c8'
+                    sh 'echo $SONAR_TOKEN'
+                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AM0312_webapp-cicd'
+                }
             }
         }
     }
